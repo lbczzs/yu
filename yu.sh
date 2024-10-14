@@ -33,11 +33,11 @@ handle_system_choice() {
             apt-get update -y && apt-get install curl -y
             ;;
         3)
-            echo "正在安装sudo"
+            echo "正在安装sudo..."
             apt-get install sudo
             ;;
         4)
-            main_menu # 返回主菜单
+            return # 返回主菜单
             ;;
         5)
             echo "退出脚本。"
@@ -45,7 +45,7 @@ handle_system_choice() {
             ;;
         *)
             echo "无效选项，请重新输入。"
-            system_menu
+            handle_system_choice
             ;;
     esac
 }
