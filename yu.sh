@@ -26,11 +26,11 @@ handle_system_choice() {
             ;;
         2)
             echo "正在安装curl..."
-            apt-get update -y && apt-get install curl -y
+            sudo apt-get update -y && sudo apt-get install curl -y
             ;;
         3)
-            echo "正在安装sudo"
-            apt-get install sudo
+            echo "正在安装sudo..."
+            sudo apt-get install sudo
             ;;
         4)
             return  # 返回主菜单
@@ -48,6 +48,12 @@ handle_system_choice() {
 
 # 处理主菜单选项
 handle_main_choice() {
+    echo "主菜单:"
+    echo "1. 常用命令"
+    echo "2. 网络配置"
+    echo "3. 文件管理"
+    echo "4. 日志查看"
+    echo "5. 退出"
     read -p "请输入你的选择 [1-5]: " choice
     case $choice in
         1)
