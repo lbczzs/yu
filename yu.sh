@@ -2,12 +2,8 @@
 
 # 定义主菜单
 show_main_menu() {
-    echo "主菜单:"
-    echo "1. 常用命令"
-    echo "2. 网络配置"
-    echo "3. 文件管理"
-    echo "4. 日志查看"
-    echo "5. 退出"
+    clear  # 清屏
+    echo "欢迎使用专属页面!"
 }
 
 # 定义子菜单1: 系统操作
@@ -33,11 +29,11 @@ handle_system_choice() {
             apt-get update -y && apt-get install curl -y
             ;;
         3)
-            echo "正在安装sudo..."
+            echo "正在安装sudo"
             apt-get install sudo
             ;;
         4)
-            return # 返回主菜单
+            return  # 返回主菜单
             ;;
         5)
             echo "退出脚本。"
@@ -55,7 +51,9 @@ handle_main_choice() {
     read -p "请输入你的选择 [1-5]: " choice
     case $choice in
         1)
-            system_menu  # 进入系统操作菜单
+            clear  # 清屏
+            show_system_menu  # 进入系统操作菜单
+            handle_system_choice
             ;;
         2)
             echo "网络配置操作待实现..."
@@ -72,17 +70,9 @@ handle_main_choice() {
             ;;
         *)
             echo "无效选项，请重新输入。"
-            main_menu
+            handle_main_choice
             ;;
     esac
-}
-
-# 定义系统操作菜单的循环
-system_menu() {
-    while true; do
-        show_system_menu
-        handle_system_choice
-    done
 }
 
 # 定义主菜单的循环
