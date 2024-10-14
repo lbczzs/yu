@@ -4,10 +4,17 @@
 show_main_menu() {
     clear  # 清屏
     echo "欢迎使用专属页面!"
+    echo "主菜单:"
+    echo "1. 常用命令"
+    echo "2. 网络配置"
+    echo "3. 文件管理"
+    echo "4. 日志查看"
+    echo "5. 退出"
 }
 
 # 定义子菜单1: 系统操作
 show_system_menu() {
+    clear  # 清屏
     echo "常用命令:"
     echo "1. 更新系统"
     echo "2. 安装curl"
@@ -18,46 +25,40 @@ show_system_menu() {
 
 # 处理子菜单1的选项
 handle_system_choice() {
-    read -p "请输入你的选择 [1-5]: " system_choice
-    case $system_choice in
-        1)
-            echo "正在更新系统..."
-            sudo apt update && sudo apt upgrade -y
-            ;;
-        2)
-            echo "正在安装curl..."
-            sudo apt-get update -y && sudo apt-get install curl -y
-            ;;
-        3)
-            echo "正在安装sudo..."
-            sudo apt-get install sudo
-            ;;
-        4)
-            return  # 返回主菜单
-            ;;
-        5)
-            echo "退出脚本。"
-            exit 0
-            ;;
-        *)
-            echo "无效选项，请重新输入。"
-            handle_system_choice
-            ;;
-    esac
+    while true; do  # 添加循环以处理返回
+        read -p "请输入你的选择 [1-5]: " system_choice
+        case $system_choice in
+            1)
+                echo "正在更新系统..."
+                sudo apt update && sudo apt upgrade -y
+                ;;
+            2)
+                echo "正在安装curl..."
+                sudo apt-get update -y && sudo apt-get install curl -y
+                ;;
+            3)
+                echo "正在安装sudo..."
+                sudo apt-get install sudo
+                ;;
+            4)
+                return  # 返回主菜单
+                ;;
+            5)
+                echo "退出脚本。"
+                exit 0
+                ;;
+            *)
+                echo "无效选项，请重新输入。"
+                ;;
+        esac
+    done
 }
 
 # 处理主菜单选项
 handle_main_choice() {
-    echo "主菜单:"
-    echo "1. 常用命令"
-    echo "2. 网络配置"
-    echo "3. 文件管理"
-    echo "4. 日志查看"
-    echo "5. 退出"
     read -p "请输入你的选择 [1-5]: " choice
     case $choice in
         1)
-            clear  # 清屏
             show_system_menu  # 进入系统操作菜单
             handle_system_choice
             ;;
